@@ -1,0 +1,24 @@
+name: Trigger Multiple Webhooks
+
+on:
+  push:
+    branches:
+      - main  # หรือสาขาที่คุณต้องการ
+
+jobs:
+  trigger_webhooks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger first webhook
+        run: |
+          curl -X POST https://script.google.com/macros/s/AKfycbzUtQxHBJYps4y8AOTE6VGYu66b9JWGr9nver3YgVKdVkoy5mbnRGupCIL3LV10b7Wt7w/exec \
+            -H "Content-Type: application/json" \
+            -d '{"key": "value"}'
+
+      - name: Trigger second webhook
+        run: |
+          curl -X POST https://api.slipok.com/api/line/webhook/34690 \
+            -H "Content-Type: application/json" \
+            -d '{"key": "value"}'
+
+      
